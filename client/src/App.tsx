@@ -7,7 +7,7 @@ function App() {
 
   async function onChange(e: React.FormEvent<HTMLInputElement>) {
     const query = e.currentTarget.value
-    const response = await fetch(`http://localhost:8080/search?q=${query}`)
+    const response = await fetch(`https://justwatch-anywhere.vercel.app/search?q=${query}`)
     const searchResults = await response.json() as SearchResult[]
     setSearchResults(searchResults)
   }
