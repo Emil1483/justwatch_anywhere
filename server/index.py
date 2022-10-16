@@ -1,11 +1,13 @@
 import requests
 from flask import Flask, request
+from flask_cors import CORS
 
 from utils.catch_errors import catch_errors
 from utils.helpers import simplify_url
 from utils.propagating_thread import PropagatingThread
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', methods=['GET'])
 def home():
