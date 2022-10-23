@@ -25,10 +25,10 @@ function Details() {
                     <h3 className='center'>Stream</h3>
                     <ul>
                         {Object.keys(offers.stream).map(
-                            streamingService => <div>
+                            streamingService => <div key={streamingService}>
                                 <h4>{streamingService}</h4>
                                 {offers.stream[streamingService].map(
-                                    country => <li>{country}</li>
+                                    country => <li key={`${streamingService} ${country}`}>{country}</li>
                                 )}
                             </div>
                         )}
@@ -37,7 +37,7 @@ function Details() {
                 <div>
                     <h3 className='center'>Rent</h3>
                     {offers.rent.map(
-                        offer => <div className='center'>
+                        offer => <div className='center' key={`rent ${JSON.stringify(offer)}`}>
                             <p>{offer.price.toFixed(2)} kr - {offer.location} - {offer.url}</p>
                         </div>
                     )}
@@ -45,7 +45,7 @@ function Details() {
                 <div>
                     <h3 className='center'>Buy</h3>
                     {offers.buy.map(
-                        offer => <div className='center'>
+                        offer => <div className='center' key={`rent ${JSON.stringify(offer)}`}>
                             <p>{offer.price.toFixed(2)} kr - {offer.location} - {offer.url}</p>
                         </div>
                     )}
