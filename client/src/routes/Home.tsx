@@ -5,18 +5,24 @@ import { SearchResult } from '../models/search-result';
 
 function Home() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  let searchQuery = '';
 
-  async function onChange(e: React.FormEvent<HTMLInputElement>) {
+  async function fetchSearchResults(query: string) {
+    searchQuery = query;
+
     const apiUrl = process.env.REACT_APP_API_URL
 
-    const query = e.currentTarget.value
     const response = await fetch(`${apiUrl}/search?q=${query}`)
+
     const searchResults = await response.json() as SearchResult[]
+
+    if (query !== searchQuery) return
+
     setSearchResults(searchResults)
   }
 
   return <div>
-    <input onChange={onChange}></input>
+    <input onChange={(e) => fetchSearchResults(e.currentTarget.value)}></input>
     <ul>
       {searchResults.map(s => <li>
         <Link to={`${s.object_type}/${s.id}`}>{s.title}</Link>
