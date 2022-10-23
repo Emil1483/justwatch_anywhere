@@ -119,6 +119,9 @@ def offers(content_type, content_id):
     } for p, u, l in buying_offers_data]
 
     return {
+        'content': requests.get(
+            f'http://apis.justwatch.com/content/titles/{content_type}/{content_id}/locale/en_NO'
+        ).json(),
         'stream': streaming_services_data,
         'rent': renting_offers_data,
         'buy': buying_offers_data,

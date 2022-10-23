@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import './App.css';
-import { SearchResults as SearchResult } from './models/search-results';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Details from './routes/Details';
+import Home from './routes/Home';
 
 function App() {
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
-  async function onChange(e: React.FormEvent<HTMLInputElement>) {
-    const query = e.currentTarget.value
-    const response = await fetch(`https://justwatch-anywhere.vercel.app/search?q=${query}`)
-    const searchResults = await response.json() as SearchResult[]
-    setSearchResults(searchResults)
-  }
-
-  return <div>
-    <input onChange={onChange}></input>
-    <ul>
-      {searchResults.map(s => <li>{s.title}</li>)}
-    </ul>
-  </div>
+  return <Router>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/:type/:id' element={<Details />} />
+    </Routes>
+  </Router>
 }
 
 export default App;
